@@ -35,7 +35,7 @@ entry_age_lbl = Label(root, text="Please Enter Your Age:", fg="black", bg="#e1ad
 entry_age_lbl.place(x=70, y=150)
 
 # entry label
-age_lbl = Entry(root, text="YYYY/MM/DD")
+age_lbl = Entry(root)
 age_lbl.place(x=300, y=150)
 
 # buttons
