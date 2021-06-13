@@ -11,10 +11,6 @@ root.geometry('300x150')
 root.config(bg='#e1ad01')
 # window title
 root.title("Login")
-# date
-date = date.today()
-# variable
-
 
 def age_verification():
     try: # error trapping
