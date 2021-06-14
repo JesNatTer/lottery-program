@@ -6,7 +6,11 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 from datetime import *
 import rsaidnumber
+import re
+import mp3play
 
+# regular expression for validating email
+regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
 
 # setup
 root = Tk()
@@ -35,10 +39,23 @@ def age_verification():
         age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
         if int(age) >= 18:
             messagebox.showinfo("Success", "Let's Play")
+            root.destroy()
+            import lotto
+            f = mp3play.load('./Audio/lotto-sound.mp3');
+            play = lambda: f.play()
         else:
             messagebox.showinfo('Failure', "You Are Too Young To Play")
     except ValueError:
         messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number")
+    email = e_address_lbl2.get()
+    if(re.search(regex, email)):
+        messagebox.showinfo("Success", "Valid Email")
+        root.destroy()
+        import lotto
+        f = mp3play.load('lotto-sound.mp3');
+        play = lambda: f.play()
+    else:
+        messagebox.showinfo("Failure", "Invalid Email")
 
 def clear_input():
     age_lbl.delete(0, END)
@@ -51,7 +68,7 @@ def exit_program():
 
 
 # label
-entry_age_lbl = Label(root, text="Please Enter Your ID Numbers:", fg="black", bg="#f9db17", font="Consolas 12 bold")
+entry_age_lbl = Label(root, text="Please Enter Your ID Number:", fg="black", bg="#f9db17", font="Consolas 12 bold")
 entry_age_lbl.place(x=70, y=200)
 full_name_lbl = Label(root, text="Please Enter Your Full Name:", fg="black", bg="#f9db17", font="Consolas 12 bold")
 full_name_lbl.place(x=70, y=170)
@@ -61,8 +78,12 @@ physical_lbl = Label(root, text="Please Enter Your Physical Address:", fg="black
 physical_lbl.place(x=70, y=260)
 t_c = Label(root, text="Terms & Conditions:", bg="#f9db17", font="Consolas 12 bold", fg="red")
 t_c.place(x=5, y=500)
-
-
+legal_age = Label(root, text="1. You Must Be 18 Years or Older To Enter", bg="#f9db17", fg="black", font="Consolas 8 bold")
+legal_age.place(x=5, y=530)
+legal_age2 = Label(root, text="2. You Must Have A Valid ID", bg="#f9db17", fg="black", font="Consolas 8 bold")
+legal_age2.place(x=5, y=550)
+legal_age3 = Label(root, text="3. User Must Be A SA Citizen", bg="#f9db17", fg="black", font="Consolas 8 bold")
+legal_age3.place(x=5, y=570)
 
 # entry label
 age_lbl = Entry(root)
