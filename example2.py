@@ -18,7 +18,7 @@ def qualify():
         else:
             messagebox.showinfo('Failure', "You Are Too Young To Play")
     except ValueError:
-        messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number)
+        messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number")
 
 
 
