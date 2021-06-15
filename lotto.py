@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-# import mp3play
 
 # setup
 root = Tk()
@@ -95,10 +94,12 @@ user_num_entry18.place(x=490, y=360)
 # instructions
 user_instructions = Label(root, text='Instructions:', bg="#f9db17", font="Consolas 12 bold")
 user_instructions.place(x=5, y=180)
-user_instructions1 = Label(root, text='1. You have up to 3 sets to choose numbers', bg="#f9db17", font="Consolas 12 bold", fg="black")
+user_instructions1 = Label(root, text='1. You have up to 3 sets to enter 6 different numbers', bg="#f9db17", font="Consolas 12 bold", fg="black")
 user_instructions1.place(x=5, y=200)
-user_instructions2 = Label(root, text='2. You have to choose 6 numbers ranging from 1-49', bg="#f9db17", font="Consolas 12 bold", fg="black")
+user_instructions2 = Label(root, text='2. You have to choose 6 different numbers ranging from 1-49', bg="#f9db17", font="Consolas 12 bold", fg="black")
 user_instructions2.place(x=5, y=220)
+user_instructions3 = Label(root, text='3. Click Check Numbers to view the winning Lotto Numbers', bg="#f9db17", font="Consolas 12 bold", fg="black")
+user_instructions3.place(x=5, y=240)
 
 # button
 lotto_btn = Button(root, text="Check Numbers", bg="black", font="Consolas 12 bold", borderwidth="10", fg="white", highlightthickness=0)
