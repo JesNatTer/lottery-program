@@ -1,1 +1,3 @@
 banks = {}
+Jeandre Awood 9804205251081 jeandreross@gmail.com 18 Weyburn Road, Grassy Park Logged into App at:2021-06-15 21:40:00.459707
+Jeandre 9804205251081 jeandreross@gmail.com aksdmalksd Logged into App at:2021-06-15 21:41:45.490827

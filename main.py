@@ -46,16 +46,16 @@ class AgeAndSound:
                                   font="Consolas 12 bold")
         self.physical_lbl.place(x=70, y=260)
         self.t_c = Label(master, text="Terms & Conditions:", bg="#f9db17", font="Consolas 12 bold", fg="red")
-        self.t_c.place(x=5, y=500)
+        self.t_c.place(x=0, y=500)
         self.legal_age = Label(master, text="1. You Must Be 18 Years or Older To Enter", bg="#f9db17", fg="black",
-                               font="Consolas 8 bold")
-        self.legal_age.place(x=5, y=530)
+                               font="Consolas 10 bold")
+        self.legal_age.place(x=0, y=530)
         self.legal_age2 = Label(master, text="2. You Must Have A Valid ID", bg="#f9db17", fg="black",
-                                font="Consolas 8 bold")
-        self.legal_age2.place(x=5, y=550)
+                                font="Consolas 10 bold")
+        self.legal_age2.place(x=0, y=550)
         self.legal_age3 = Label(master, text="3. User Must Be A SA Citizen", bg="#f9db17", fg="black",
-                                font="Consolas 8 bold")
-        self.legal_age3.place(x=5, y=570)
+                                font="Consolas 10 bold")
+        self.legal_age3.place(x=0, y=570)
         # entry label
         self.age_lbl = Entry(master)
         self.age_lbl.place(x=450, y=200)
@@ -79,9 +79,8 @@ class AgeAndSound:
         f = open("details.txt", "a+")
         f.write(
             self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + self.e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
-                now) + "/n")
+                now) + "\n")
         f.close()
-        playsound("./Audio/lotto-sound.mp3")
         try:
             id_number = rsaidnumber.parse(self.age_lbl.get())
             age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
@@ -107,6 +106,7 @@ class AgeAndSound:
     def exit_program(self):
         return root.destroy()
 
+        playsound("./Audio/lotto-sound.mp3")
 
 
 
