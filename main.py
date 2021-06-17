@@ -67,11 +67,14 @@ class AgeAndSound:
         self.physical_lbl2.place(x=450, y=260)
 
         # buttons
-        self.confirm_btn = Button(master, borderwidth="10", text="Verify", font="Consolas 15 bold", fg="white", bg="black", command=self.age_verification)
+        self.confirm_btn = Button(master, borderwidth="10", text="Verify", font="Consolas 15 bold", fg="white",
+                                  bg="black", command=self.age_verification)
         self.confirm_btn.place(x=296, y=320)
-        self.clear_btn = Button(master, borderwidth="10", text="Clear", font="Consolas 15 bold", fg="white", bg="black", command=self.clear_input)
+        self.clear_btn = Button(master, borderwidth="10", text="Clear", font="Consolas 15 bold", fg="white", bg="black",
+                                command=self.clear_input)
         self.clear_btn.place(x=70, y=320)
-        self.exit_btn = Button(master, borderwidth="10", text="Exit", font="Consolas 15 bold", fg="white", bg="black", command=self.exit_program)
+        self.exit_btn = Button(master, borderwidth="10", text="Exit", font="Consolas 15 bold", fg="white", bg="black",
+                               command=self.exit_program)
         self.exit_btn.place(x=523, y=320)
 
     def age_verification(self):
@@ -81,6 +84,7 @@ class AgeAndSound:
             self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + self.e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
                 now) + "\n")
         f.close()
+        playsound("./Audio/lotto-sound.mp3")
         try:
             id_number = rsaidnumber.parse(self.age_lbl.get())
             age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
@@ -103,11 +107,9 @@ class AgeAndSound:
         self.physical_lbl2.delete(0, END)
         self.e_address_lbl2.delete(0, END)
         self.full_name_lbl2.delete(0, END)
+
     def exit_program(self):
         return root.destroy()
-
-        playsound("./Audio/lotto-sound.mp3")
-
 
 
 AgeAndSound(root)

@@ -22,17 +22,14 @@ lotto_list1 = []
 lotto_list2 = []
 lotto_list3 = []
 
+
 def generate_list1():
-    global lotto_list1
-    num1 = int(user_num_entry.get())
-    num2 = int(user_num_entry4.get())
-    num3 = int(user_num_entry5.get())
-    num4 = int(user_num_entry6.get())
-    num5 = int(user_num_entry7.get())
-    num6 = int(user_num_entry8.get())
-    list_1 = [num1, num2, num3, num4, num5, num6]
-    lotto_list1.append(list_1)
-    return list_1
+    lotto_list1.append(user_num_entry.get())
+    lotto_list1.append(user_num_entry4.get())
+    lotto_list1.append(user_num_entry5.get())
+    lotto_list1.append(user_num_entry6.get())
+    lotto_list1.append(user_num_entry7.get())
+    lotto_list1.append(user_num_entry8.get())
 
 
 def generate_list2():
@@ -58,7 +55,13 @@ def generate_list3():
 
 
 def generate_nums():
-    lotto_nums = sample(range(1, 49), 7)
+    lotto_list1.append(int(user_num_entry.get()))
+    lotto_list1.append(int(user_num_entry3.get()))
+    lotto_list1.append(int(user_num_entry4.get()))
+    lotto_list1.append(int(user_num_entry5.get()))
+    lotto_list1.append(int(user_num_entry6.get()))
+    lotto_list1.append(int(user_num_entry7.get()))
+    lotto_nums = sample(range(1, 49), 6)
     lotto_nums.sort()
     lotto_num_lbl1.configure(text=lotto_nums[0], bg="white")
     lotto_num_lbl2.configure(text=lotto_nums[1], bg="white")
@@ -68,8 +71,8 @@ def generate_nums():
     lotto_num_lbl6.configure(text=lotto_nums[5], bg="red")
 
     count = 0
-    for num in lotto_list1:
-        if num in lotto_list1:
+    for x in lotto_nums:
+        if x in lotto_list1:
             count += 1
     if count <= 1:
         messagebox.showinfo("Bad Luck!", str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[0])
@@ -90,6 +93,16 @@ def generate_nums():
                             str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[5])
     return lotto_nums
 
+
+def banking_details():
+    messagebox.showinfo("Success", "Please Enter Your Bank Details In The Next Window")
+    root.destroy()
+    import bank
+
+def currency_convertor():
+    messagebox.showinfo("Success", "Welcome To The Currency Convertor")
+    root.destroy()
+    import currency
 
 def clear_input():
     user_num_entry.delete(0, END)
@@ -185,10 +198,16 @@ lotto_btn = Button(root, text="Check Numbers", bg="black", font="Consolas 12 bol
 lotto_btn.place(x=585, y=320)
 clear_btn = Button(root, text='Clear', command=clear_input, bg="black", font="Consolas 12 bold", borderwidth="10",
                    fg="white", highlightthickness=0)
-clear_btn.place(x=50, y=320)
+clear_btn.place(x=5, y=320)
 exit_btn = Button(root, text='Exit', command=exit_program, bg="black", font="Consolas 12 bold", borderwidth="10",
                   fg="white", highlightthickness=0)
 exit_btn.place(x=150, y=320)
+
+claim_btn = Button(root, text="Claim Prize", bg="Black", font="Consolas 12 bold", fg="white", command=banking_details, borderwidth=10)
+claim_btn.place(x=592, y=400)
+
+currency_btn = Button(root, text="Currency Convertor", bg="Black", font="Consolas 12 bold", fg="white", command=currency_convertor, borderwidth=10)
+currency_btn.place(x=5, y=400)
 
 # display numbers header label
 lotto_num_header = Label(root, text='The Lotto Numbers Are:', bg='#f9db17', fg='black', font="Consolas 12 bold")
