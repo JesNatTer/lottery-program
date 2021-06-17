@@ -34,11 +34,11 @@ def generate_list1():
 
 def generate_list2():
     num7 = user_num_entry2.get()
-    num8 = user_num_entry9.get()
-    num9 = user_num_entry10.get()
-    num10 = user_num_entry11.get()
-    num11 = user_num_entry12.get()
-    num12 = user_num_entry13.get()
+    num8 = user_num_entry8.get()
+    num9 = user_num_entry9.get()
+    num10 = user_num_entry10.get()
+    num11 = user_num_entry11.get()
+    num12 = user_num_entry12.get()
     list_2 = num7, num8, num9, num10, num11, num12
     return list_2
 

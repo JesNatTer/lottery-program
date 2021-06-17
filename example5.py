@@ -1,6 +1,6 @@
-
 from tkinter import *
 import requests
+
 # Let's start with the design of the GUI
 
 
@@ -58,8 +58,8 @@ def convert_curr():
     ans = num * information_json['conversion_rates'][convert_list.get(ACTIVE)]
     convert_label['text'] = ans
 
+
 convert_btn = Button(root, command=convert_curr, text="CONVERT", font=("Serif", 20), width=20, bg="#202020")
 convert_btn.pack()
-
 
 root.mainloop()

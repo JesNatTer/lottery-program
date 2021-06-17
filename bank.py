@@ -9,21 +9,26 @@ root.geometry("500x500")  # window size
 root.title("Banking Details")  # window title
 root.config(bg="#f9db17")
 
+
 # bank function
 def bank_number():
-    f = open("details.txt", "a+")
-    f.write(
-        btn1.get() + " " + btn2.get() + " " + btn3.get() + " " + btn4.get() + " " + "Completed at:" + str(now) + "/n")
-    f.close()
-        try:
-            if bank_number != 11:
-                messagebox.showinfo("Failure", "Please Enter A 11 Digit Bank Account Number!")
-            else:
-                messagebox.showinfo("Success", "Please Check Your Email For Further Instructions")
-        except ValueError:
-            messagebox.showinfo("Invalid", "Please Use Digits Only")
+    try:
+        bank_num = acc_num_entry.get()
+        branch = branch_num_entry.get()
+        if len(bank_num) == 11 and len(branch) == 6:
+            f = open("details.txt", "a+")
+            f.write(
+                acc_num_entry.get() + " " + acc_num_entry.get() + " " + branch_num_entry.get() + " " + combo_box_banks.get() + "\n")
+            f.close()
+            messagebox.showinfo("Success", "Please Check Your Email For Further Instructions")
+        else:
+            messagebox.showinfo("Failure", "Please Enter A 11 Digit Bank Account Number and A 6 Digit Branch Code")
+    except ValueError(str):
+        messagebox.showinfo("Invalid", "Please Use Digits Only")
 
-# clear function
+
+
+    # clear function
 def clear_input():
     acc_name_entry.delete(0, END)
     acc_num_entry.delete(0, END)
@@ -60,7 +65,7 @@ branch_num_entry = Entry(root)
 branch_num_entry.place(x=250, y=280)
 
 # buttons
-submit_btn = Button(root, text="Submit", font="Consolas 12 bold", bg="black", fg="#f9db17", borderwidth=10)
+submit_btn = Button(root, text="Submit", font="Consolas 12 bold", bg="black", fg="#f9db17", borderwidth=10, command=bank_number)
 submit_btn.place(x=177, y=400)
 clear_btn = Button(root, text="Clear", font="Consolas 12 bold", bg="black", fg="#f9db17", borderwidth=10,
                    command=clear_input)

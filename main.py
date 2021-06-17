@@ -78,17 +78,17 @@ class AgeAndSound:
         self.exit_btn.place(x=523, y=320)
 
     def age_verification(self):
-        # appending text
-        f = open("details.txt", "a+")
-        f.write(
-            self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + self.e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
-                now) + "\n")
-        f.close()
-        playsound("./Audio/lotto-sound.mp3")
         try:
             id_number = rsaidnumber.parse(self.age_lbl.get())
             age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
             if int(age) >= 18:
+                # appending text
+                f = open("details.txt", "a+")
+                f.write(
+                    self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + self.e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
+                        now) + "\n")
+                f.close()
+                playsound("./Audio/lotto-sound.mp3")
                 messagebox.showinfo("Success", "Let's Play")
                 root.destroy()
                 import lotto

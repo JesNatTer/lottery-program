@@ -32,7 +32,7 @@ for i in conversion_rates.keys():
 # currency functions
 def convert_currency():
     num = float(amount_entry.get())
-    ans = num * conversion_rates['conversion_rates'][amount_entry.get()]
+    ans = num * results[currency_2_cb.get()]
     display_amount['text'] = ans
 
 
