@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter.ttk import Combobox
 from PIL import ImageTk, Image
 import requests
+from playsound import playsound
 
 # setting up window
 root = Tk()
@@ -20,31 +21,36 @@ canvas.create_image(20, 20, anchor=NW, image=img)
 
 # calling API
 response = requests.get("https://v6.exchangerate-api.com/v6/48fdd8d31b8c3c5e6b84fa6f/latest/ZAR")
-results = response.json()
+response = response.json()
 
-conversion_rates = results['conversion_rates']
+conversion_rate = response["conversion_rates"]
 
 currency_options = []
-for i in conversion_rates.keys():
+for i in conversion_rate.keys():
     currency_options.append(i)
 
 
-# currency functions
 def convert_currency():
-    num = float(amount_entry.get())
-    ans = num * results[currency_2_cb.get()]
-    display_amount['text'] = ans
+    f = open("details.txt", "a+")
+    f.write("\n" + "Converted Winnings:" + " " + str(display_amount.cget("text")))
+    playsound("./Audio/counting-money.mp3")
+    amount_entered = float(amount_entry.get())
+    formula = round(amount_entered * response["conversion_rates"][currency_2_cb.get()], 2)
+    display_amount.config(text=float(formula))
+    messagebox.showinfo("Success", "Please Enter Your Banking Details In The Next Window")
+    root.destroy()
+    import bank
 
 
 # exit function
 def exit_program():
     return root.destroy()
 
+
 # clear function
 def clear_program():
     amount_entry.delete(0, END)
     display_amount.config(text="", bg="#f9db17")
-    currency_2_cb.delete(0, END)
 
 
 # labels
@@ -72,12 +78,14 @@ currency_2_cb['state'] = 'readonly'
 currency_2_cb.set('Select Currency')
 currency_2_cb.place(x=190, y=280)
 # currency_2_cb.config(bg="#f9db17")
+display_amount.config(text='')
 
 # buttons
 exit_btn = Button(root, borderwidth="10", text="Exit", font="Consolas 15 bold", fg="white", bg="black",
                   command=exit_program)
 exit_btn.place(x=400, y=400)
-clear_btn = Button(root, borderwidth="10", text="Clear", font="Consolas 15 bold", fg="white", bg="black", command=clear_program)
+clear_btn = Button(root, borderwidth="10", text="Clear", font="Consolas 15 bold", fg="white", bg="black",
+                   command=clear_program)
 clear_btn.place(x=5, y=400)
 convert_btn = Button(root, borderwidth="10", text="Convert", font="Consolas 15 bold", fg="white", bg="black",
                      command=convert_currency)

@@ -61,8 +61,6 @@ class AgeAndSound:
         self.age_lbl.place(x=450, y=200)
         self.full_name_lbl2 = Entry(master)
         self.full_name_lbl2.place(x=450, y=170)
-        self.e_address_lbl2 = Entry(master)
-        self.e_address_lbl2.place(x=450, y=230)
         self.physical_lbl2 = Entry(master)
         self.physical_lbl2.place(x=450, y=260)
 
@@ -85,18 +83,18 @@ class AgeAndSound:
                 # appending text
                 f = open("details.txt", "a+")
                 f.write(
-                    self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + self.e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
+                    self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
                         now) + "\n")
                 f.close()
-                playsound("./Audio/lotto-sound.mp3")
                 messagebox.showinfo("Success", "Let's Play")
+                playsound("./Audio/lotto-sound.mp3")
                 root.destroy()
                 import lotto
             else:
                 messagebox.showinfo('Failure', "You Are Too Young To Play")
         except ValueError:
             messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number")
-        email = self.e_address_lbl2.get()
+            email = e_address_lbl2.get()
         if re.search(regex, email):
             messagebox.showinfo("Success", "Valid Email")
         else:
@@ -105,12 +103,20 @@ class AgeAndSound:
     def clear_input(self):
         self.age_lbl.delete(0, END)
         self.physical_lbl2.delete(0, END)
-        self.e_address_lbl2.delete(0, END)
+        e_address_lbl2.delete(0, END)
         self.full_name_lbl2.delete(0, END)
 
     def exit_program(self):
         return root.destroy()
 
+
+def return_email():
+    email_returned = self.e_address_lbl2get()
+    return email_returned
+
+
+e_address_lbl2 = Entry(root)
+e_address_lbl2.place(x=450, y=230)
 
 AgeAndSound(root)
 # to run the program

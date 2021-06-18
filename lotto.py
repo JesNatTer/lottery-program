@@ -17,7 +17,7 @@ canvas.place(x=135, y=5)
 img = ImageTk.PhotoImage(Image.open('./Images/ITHUBA-NATIONAL-LOTTERY.png'))
 canvas.create_image(20, 20, anchor=NW, image=img)
 
-winnings = ["R0", "R20", "R100.50", "R2,384", "R8,584", "R10,000,000"]
+winnings = [0, 20, 100.50, 2, 384, 8, 584, 10, 000, 000]
 lotto_list1 = []
 lotto_list2 = []
 lotto_list3 = []
@@ -33,28 +33,28 @@ def generate_list1():
 
 
 def generate_list2():
-    num7 = user_num_entry2.get()
-    num8 = user_num_entry8.get()
-    num9 = user_num_entry9.get()
-    num10 = user_num_entry10.get()
-    num11 = user_num_entry11.get()
-    num12 = user_num_entry12.get()
-    list_2 = num7, num8, num9, num10, num11, num12
-    return list_2
+    lotto_list2.append(user_num_entry2.get())
+    lotto_list2.append(user_num_entry8.get())
+    lotto_list2.append(user_num_entry9.get())
+    lotto_list2.append(user_num_entry10.get())
+    lotto_list2.append(user_num_entry11.get())
+    lotto_list2.append(user_num_entry12.get())
 
 
 def generate_list3():
-    num13 = user_num_entry3.get()
-    num14 = user_num_entry14.get()
-    num15 = user_num_entry15.get()
-    num16 = user_num_entry16.get()
-    num17 = user_num_entry17.get()
-    num18 = user_num_entry18.get()
-    list_3 = num13, num14, num15, num16, num17, num18
-    return list_3
+    lotto_list3.append(user_num_entry3.get())
+    lotto_list3.append(user_num_entry14.get())
+    lotto_list3.append(user_num_entry15.get())
+    lotto_list3.append(user_num_entry16.get())
+    lotto_list3.append(user_num_entry17.get())
+    lotto_list3.append(user_num_entry18.get())
 
 
 def generate_nums():
+    winnings_won1 = []
+    # f = open("details.txt", "a+")
+    # f.write("Your Winnings Were:" + " " + winnings_won)
+    # f.close()
     lotto_list1.append(int(user_num_entry.get()))
     lotto_list1.append(int(user_num_entry3.get()))
     lotto_list1.append(int(user_num_entry4.get()))
@@ -71,27 +71,41 @@ def generate_nums():
     lotto_num_lbl6.configure(text=lotto_nums[5], bg="red")
 
     count = 0
-    for x in lotto_nums:
-        if x in lotto_list1:
-            count += 1
-    if count <= 1:
-        messagebox.showinfo("Bad Luck!", str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[0])
-    elif count == 2:
-        messagebox.showinfo("Congratulations!",
-                            str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[1])
-    elif count == 3:
-        messagebox.showinfo("Congratulations!",
-                            str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[2])
-    elif count == 4:
-        messagebox.showinfo("Congratulations!",
-                            str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[3])
-    elif count == 5:
-        messagebox.showinfo("Congratulations!",
-                            str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[4])
-    elif count == 6:
-        messagebox.showinfo("Congratulations!",
-                            str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + winnings[5])
-    return lotto_nums
+    try:
+        for x in lotto_nums:
+            if x in lotto_list1 or lotto_list2 or lotto_list3:
+                count += 1
+        if count <= 1:
+            messagebox.showinfo("Bad Luck!",
+                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
+                                    winnings[0]))
+            str(winnings_won1.append(winnings[0]))
+        elif count == 2:
+            messagebox.showinfo("Congratulations!",
+                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
+                                    winnings[1]))
+            str(winnings_won1.append(winnings[1]))
+        elif count == 3:
+            messagebox.showinfo("Congratulations!",
+                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
+                                    winnings[2]))
+            str(winnings_won1.append(winnings[2]))
+        elif count == 4:
+            messagebox.showinfo("Congratulations!",
+                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + str(winnings[3]))
+            str(winnings_won1.append(winnings[3]))
+        elif count == 5:
+            messagebox.showinfo("Congratulations!",
+                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + str(
+                                    winnings_won1.append(winnings[4])))
+        elif count == 6:
+            messagebox.showinfo("Congratulations!",
+                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + str(
+                                    winnings_won1.append(winnings[5])))
+            print(winnings_won1)
+        return lotto_nums
+    except ValueError:
+        messagebox.showinfo("Failure", "Please Enter Digits Only")
 
 
 def banking_details():
@@ -99,10 +113,12 @@ def banking_details():
     root.destroy()
     import bank
 
+
 def currency_convertor():
     messagebox.showinfo("Success", "Welcome To The Currency Convertor")
     root.destroy()
     import currency
+
 
 def clear_input():
     user_num_entry.delete(0, END)
@@ -203,10 +219,12 @@ exit_btn = Button(root, text='Exit', command=exit_program, bg="black", font="Con
                   fg="white", highlightthickness=0)
 exit_btn.place(x=150, y=320)
 
-claim_btn = Button(root, text="Claim Prize", bg="Black", font="Consolas 12 bold", fg="white", command=banking_details, borderwidth=10)
+claim_btn = Button(root, text="Claim Prize", bg="Black", font="Consolas 12 bold", fg="white", command=banking_details,
+                   borderwidth=10)
 claim_btn.place(x=592, y=400)
 
-currency_btn = Button(root, text="Currency Convertor", bg="Black", font="Consolas 12 bold", fg="white", command=currency_convertor, borderwidth=10)
+currency_btn = Button(root, text="Currency Convertor", bg="Black", font="Consolas 12 bold", fg="white",
+                      command=currency_convertor, borderwidth=10)
 currency_btn.place(x=5, y=400)
 
 # display numbers header label

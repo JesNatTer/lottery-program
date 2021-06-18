@@ -1,2 +1,5 @@
-banks = {1: "FNB", 2: "Absa", 3: "StandardBank", 4: "Capitec"}
 
+Jeandre Awood 9804205251081 jeandreross@gmail.com lkvns Logged into App at:2021-06-18 16:32:15.865325
+62600065363 62600065363 250655 FNB
+62600065363 62600065363 250655 FNB
+62600065363 62600065363 250655 FNB

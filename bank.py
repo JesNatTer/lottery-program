@@ -2,6 +2,11 @@ from tkinter import *
 from tkinter.ttk import Combobox
 from PIL import ImageTk, Image
 from tkinter import messagebox
+from playsound import playsound
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import main
 
 # setting up the window
 root = Tk()
@@ -11,7 +16,7 @@ root.config(bg="#f9db17")
 
 
 # bank function
-def bank_number():
+def bank_number(self):
     try:
         bank_num = acc_num_entry.get()
         branch = branch_num_entry.get()
@@ -20,15 +25,42 @@ def bank_number():
             f.write(
                 acc_num_entry.get() + " " + acc_num_entry.get() + " " + branch_num_entry.get() + " " + combo_box_banks.get() + "\n")
             f.close()
+            sender_email_id = 'jeandre.lotto@gmail.com'
+            receiver_email_id = main.return_email(self)
+            password = "lifechoices2021"
+            subject = "Congratulations"
+            msg = MIMEMultipart()
+            msg['From'] = sender_email_id
+            msg['To'] = receiver_email_id
+            msg['Subject'] = subject
+            body = "confirmed winnings" + "banking details" + "player_id"
+            msg.attach(MIMEText(body, 'plain'))
+            text = msg.as_string()
+            # creates SMTP session
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+            # start TLS for security
+            s.starttls()
+            # Authentication
+            s.login(sender_email_id, password)
+            # message to be sent
+
+            # sending the mail
+            s.sendmail(sender_email_id, receiver_email_id, text)
+            # terminating the session
+            s.quit()
+            playsound("./Audio/submit.mp3")
             messagebox.showinfo("Success", "Please Check Your Email For Further Instructions")
         else:
             messagebox.showinfo("Failure", "Please Enter A 11 Digit Bank Account Number and A 6 Digit Branch Code")
-    except ValueError(str):
+    except ValueError:
         messagebox.showinfo("Invalid", "Please Use Digits Only")
 
 
+#     # send email function
+# def send_email():
 
-    # clear function
+
+# clear function
 def clear_input():
     acc_name_entry.delete(0, END)
     acc_num_entry.delete(0, END)
@@ -65,7 +97,8 @@ branch_num_entry = Entry(root)
 branch_num_entry.place(x=250, y=280)
 
 # buttons
-submit_btn = Button(root, text="Submit", font="Consolas 12 bold", bg="black", fg="#f9db17", borderwidth=10, command=bank_number)
+submit_btn = Button(root, text="Submit", font="Consolas 12 bold", bg="black", fg="#f9db17", borderwidth=10,
+                    command=bank_number)
 submit_btn.place(x=177, y=400)
 clear_btn = Button(root, text="Clear", font="Consolas 12 bold", bg="black", fg="#f9db17", borderwidth=10,
                    command=clear_input)
