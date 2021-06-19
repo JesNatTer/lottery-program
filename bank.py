@@ -4,19 +4,18 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 from playsound import playsound
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import main
-
+from main import return_email
 # setting up the window
 root = Tk()
 root.geometry("500x500")  # window size
 root.title("Banking Details")  # window title
 root.config(bg="#f9db17")
 
+emails_id = return_email
+
 
 # bank function
-def bank_number(self):
+def bank_number():
     try:
         bank_num = acc_num_entry.get()
         branch = branch_num_entry.get()
@@ -25,29 +24,37 @@ def bank_number(self):
             f.write(
                 acc_num_entry.get() + " " + acc_num_entry.get() + " " + branch_num_entry.get() + " " + combo_box_banks.get() + "\n")
             f.close()
-            sender_email_id = 'jeandre.lotto@gmail.com'
-            receiver_email_id = main.return_email(self)
-            password = "lifechoices2021"
-            subject = "Congratulations"
-            msg = MIMEMultipart()
-            msg['From'] = sender_email_id
-            msg['To'] = receiver_email_id
-            msg['Subject'] = subject
-            body = "confirmed winnings" + "banking details" + "player_id"
-            msg.attach(MIMEText(body, 'plain'))
-            text = msg.as_string()
             # creates SMTP session
+            import smtplib
             s = smtplib.SMTP('smtp.gmail.com', 587)
+            sender_email_id = 'godwin@lifechoices.co.za'
+            receiver_email_id = 'gpdzvapatsva@gmail.com'
+            password = input("enter password")
             # start TLS for security
             s.starttls()
             # Authentication
             s.login(sender_email_id, password)
             # message to be sent
-
+            message = "hi jeandre\n"
+            message = message + "How was your saturday"
             # sending the mail
-            s.sendmail(sender_email_id, receiver_email_id, text)
+            s.sendmail(sender_email_id, receiver_email_id, message)
             # terminating the session
             s.quit()
+            """s = smtplib.SMTP('smtp.gmail.com', 587)
+            sender_email_id = 'jeandre.lotto@gmail.com'
+            receiver_email_id = emails_id
+            password = "lifechoices2021"
+            message = "Subject: Congratulations \n"
+            message = message + "confirmed winnings" + "banking details" + "player_id"
+            # start TLS for security
+            s.starttls()
+            # Authentication/home/lifechoices/Documents/Python/Email
+            s.login(sender_email_id, password)
+            # sending the mail
+            s.sendmail(sender_email_id, receiver_email_id, message)
+            # terminating the session
+            s.quit()"""
             playsound("./Audio/submit.mp3")
             messagebox.showinfo("Success", "Please Check Your Email For Further Instructions")
         else:

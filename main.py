@@ -30,94 +30,94 @@ img = ImageTk.PhotoImage(Image.open('./Images/ITHUBA-NATIONAL-LOTTERY.png'))
 canvas.create_image(20, 20, anchor=NW, image=img)
 
 
-class AgeAndSound:
-    def __init__(self, master):
-        # label
-        self.entry_age_lbl = Label(master, text="Please Enter Your ID Number:", fg="black", bg="#f9db17",
-                                   font="Consolas 12 bold")
-        self.entry_age_lbl.place(x=70, y=200)
-        self.full_name_lbl = Label(master, text="Please Enter Your Full Name:", fg="black", bg="#f9db17",
-                                   font="Consolas 12 bold")
-        self.full_name_lbl.place(x=70, y=170)
-        self.e_address_lbl = Label(master, text="Please Enter Your Email Address:", fg="black", bg="#f9db17",
-                                   font="Consolas 12 bold")
-        self.e_address_lbl.place(x=70, y=230)
-        self.physical_lbl = Label(master, text="Please Enter Your Physical Address:", fg="black", bg="#f9db17",
-                                  font="Consolas 12 bold")
-        self.physical_lbl.place(x=70, y=260)
-        self.t_c = Label(master, text="Terms & Conditions:", bg="#f9db17", font="Consolas 12 bold", fg="red")
-        self.t_c.place(x=0, y=500)
-        self.legal_age = Label(master, text="1. You Must Be 18 Years or Older To Enter", bg="#f9db17", fg="black",
-                               font="Consolas 10 bold")
-        self.legal_age.place(x=0, y=530)
-        self.legal_age2 = Label(master, text="2. You Must Have A Valid ID", bg="#f9db17", fg="black",
-                                font="Consolas 10 bold")
-        self.legal_age2.place(x=0, y=550)
-        self.legal_age3 = Label(master, text="3. User Must Be A SA Citizen", bg="#f9db17", fg="black",
-                                font="Consolas 10 bold")
-        self.legal_age3.place(x=0, y=570)
-        # entry label
-        self.age_lbl = Entry(master)
-        self.age_lbl.place(x=450, y=200)
-        self.full_name_lbl2 = Entry(master)
-        self.full_name_lbl2.place(x=450, y=170)
-        self.physical_lbl2 = Entry(master)
-        self.physical_lbl2.place(x=450, y=260)
-
-        # buttons
-        self.confirm_btn = Button(master, borderwidth="10", text="Verify", font="Consolas 15 bold", fg="white",
-                                  bg="black", command=self.age_verification)
-        self.confirm_btn.place(x=296, y=320)
-        self.clear_btn = Button(master, borderwidth="10", text="Clear", font="Consolas 15 bold", fg="white", bg="black",
-                                command=self.clear_input)
-        self.clear_btn.place(x=70, y=320)
-        self.exit_btn = Button(master, borderwidth="10", text="Exit", font="Consolas 15 bold", fg="white", bg="black",
-                               command=self.exit_program)
-        self.exit_btn.place(x=523, y=320)
-
-    def age_verification(self):
-        try:
-            id_number = rsaidnumber.parse(self.age_lbl.get())
-            age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
-            if int(age) >= 18:
-                # appending text
-                f = open("details.txt", "a+")
-                f.write(
-                    self.full_name_lbl2.get() + " " + self.age_lbl.get() + " " + e_address_lbl2.get() + " " + self.physical_lbl2.get() + " " + "Logged into App at:" + str(
-                        now) + "\n")
-                f.close()
-                messagebox.showinfo("Success", "Let's Play")
-                playsound("./Audio/lotto-sound.mp3")
-                root.destroy()
-                import lotto
-            else:
-                messagebox.showinfo('Failure', "You Are Too Young To Play")
-        except ValueError:
-            messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number")
-            email = e_address_lbl2.get()
-        if re.search(regex, email):
-            messagebox.showinfo("Success", "Valid Email")
+def age_verification():
+    global email
+    try:
+        id_number = rsaidnumber.parse(age_lbl.get())
+        age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
+        if int(age) >= 18:
+            # appending text
+            f = open("details.txt", "a+")
+            f.write(
+                full_name_lbl2.get() + " " + age_lbl.get() + " " + e_address_lbl2.get() + " " + physical_lbl2.get() + " " + "Logged into App at:" + str(
+                    now) + "\n")
+            f.close()
+            messagebox.showinfo("Success", "Let's Play")
+            playsound("./Audio/lotto-sound.mp3")
+            root.destroy()
+            import lotto
         else:
-            messagebox.showinfo("Failure", "Invalid Email")
+            messagebox.showinfo('Failure', "You Are Too Young To Play")
+    except ValueError:
+        messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number")
+        email = e_address_lbl2.get()
+    if re.search(regex, email):
+        messagebox.showinfo("Success", "Valid Email")
+    else:
+        messagebox.showinfo("Failure", "Invalid Email")
 
-    def clear_input(self):
-        self.age_lbl.delete(0, END)
-        self.physical_lbl2.delete(0, END)
-        e_address_lbl2.delete(0, END)
-        self.full_name_lbl2.delete(0, END)
 
-    def exit_program(self):
-        return root.destroy()
+def clear_input():
+    age_lbl.delete(0, END)
+    physical_lbl2.delete(0, END)
+    e_address_lbl2.delete(0, END)
+    full_name_lbl2.delete(0, END)
+
+
+def exit_program():
+    return root.destroy()
 
 
 def return_email():
-    email_returned = self.e_address_lbl2get()
+    email_returned = e_address_lbl2.get()
     return email_returned
 
+
+# label
+entry_age_lbl = Label(root, text="Please Enter Your ID Number:", fg="black", bg="#f9db17",
+                      font="Consolas 12 bold")
+entry_age_lbl.place(x=70, y=200)
+full_name_lbl = Label(root, text="Please Enter Your Full Name:", fg="black", bg="#f9db17",
+                      font="Consolas 12 bold")
+full_name_lbl.place(x=70, y=170)
+e_address_lbl = Label(root, text="Please Enter Your Email Address:", fg="black", bg="#f9db17",
+                      font="Consolas 12 bold")
+e_address_lbl.place(x=70, y=230)
+physical_lbl = Label(root, text="Please Enter Your Physical Address:", fg="black", bg="#f9db17",
+                     font="Consolas 12 bold")
+physical_lbl.place(x=70, y=260)
+t_c = Label(root, text="Terms & Conditions:", bg="#f9db17", font="Consolas 12 bold", fg="red")
+t_c.place(x=0, y=500)
+legal_age = Label(root, text="1. You Must Be 18 Years or Older To Enter", bg="#f9db17", fg="black",
+                  font="Consolas 10 bold")
+legal_age.place(x=0, y=530)
+legal_age2 = Label(root, text="2. You Must Have A Valid ID", bg="#f9db17", fg="black",
+                   font="Consolas 10 bold")
+legal_age2.place(x=0, y=550)
+legal_age3 = Label(root, text="3. User Must Be A SA Citizen", bg="#f9db17", fg="black",
+                   font="Consolas 10 bold")
+legal_age3.place(x=0, y=570)
+# entry label
+age_lbl = Entry(root)
+age_lbl.place(x=450, y=200)
+full_name_lbl2 = Entry(root)
+full_name_lbl2.place(x=450, y=170)
+physical_lbl2 = Entry(root)
+physical_lbl2.place(x=450, y=260)
+
+# buttons
+confirm_btn = Button(root, borderwidth="10", text="Verify", font="Consolas 15 bold", fg="white",
+                     bg="black", command=age_verification)
+confirm_btn.place(x=296, y=320)
+clear_btn = Button(root, borderwidth="10", text="Clear", font="Consolas 15 bold", fg="white", bg="black",
+                   command=clear_input)
+clear_btn.place(x=70, y=320)
+exit_btn = Button(root, borderwidth="10", text="Exit", font="Consolas 15 bold", fg="white", bg="black",
+                  command=exit_program)
+exit_btn.place(x=523, y=320)
 
 e_address_lbl2 = Entry(root)
 e_address_lbl2.place(x=450, y=230)
 
-AgeAndSound(root)
 # to run the program
 root.mainloop()
