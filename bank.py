@@ -27,34 +27,20 @@ def bank_number():
             # creates SMTP session
             import smtplib
             s = smtplib.SMTP('smtp.gmail.com', 587)
-            sender_email_id = 'godwin@lifechoices.co.za'
-            receiver_email_id = 'gpdzvapatsva@gmail.com'
-            password = input("enter password")
+            sender_email_id = 'jeandre.lotto@gmail.com'
+            receiver_email_id = emails_id
+            password = "lifechoices2021"
             # start TLS for security
             s.starttls()
             # Authentication
             s.login(sender_email_id, password)
             # message to be sent
-            message = "hi jeandre\n"
+            message = "Congratulations\n"
             message = message + "How was your saturday"
             # sending the mail
             s.sendmail(sender_email_id, receiver_email_id, message)
             # terminating the session
             s.quit()
-            """s = smtplib.SMTP('smtp.gmail.com', 587)
-            sender_email_id = 'jeandre.lotto@gmail.com'
-            receiver_email_id = emails_id
-            password = "lifechoices2021"
-            message = "Subject: Congratulations \n"
-            message = message + "confirmed winnings" + "banking details" + "player_id"
-            # start TLS for security
-            s.starttls()
-            # Authentication/home/lifechoices/Documents/Python/Email
-            s.login(sender_email_id, password)
-            # sending the mail
-            s.sendmail(sender_email_id, receiver_email_id, message)
-            # terminating the session
-            s.quit()"""
             playsound("./Audio/submit.mp3")
             messagebox.showinfo("Success", "Please Check Your Email For Further Instructions")
         else:

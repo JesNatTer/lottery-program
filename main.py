@@ -31,7 +31,7 @@ canvas.create_image(20, 20, anchor=NW, image=img)
 
 
 def age_verification():
-    global email
+    email = e_address_lbl2.get()
     try:
         id_number = rsaidnumber.parse(age_lbl.get())
         age = str((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
@@ -48,13 +48,12 @@ def age_verification():
             import lotto
         else:
             messagebox.showinfo('Failure', "You Are Too Young To Play")
+        if re.search(regex, email):
+            pass
+        else:
+            messagebox.showinfo("Failure", "Invalid Email")
     except ValueError:
         messagebox.showinfo("Failure", "Please Enter A Valid 13 Digit ID Number")
-        email = e_address_lbl2.get()
-    if re.search(regex, email):
-        messagebox.showinfo("Success", "Valid Email")
-    else:
-        messagebox.showinfo("Failure", "Invalid Email")
 
 
 def clear_input():
@@ -69,7 +68,7 @@ def exit_program():
 
 
 def return_email():
-    email_returned = e_address_lbl2.get()
+    email_returned = str(e_address_lbl2.get())
     return email_returned
 
 

@@ -10,7 +10,7 @@ root.geometry('800x500')
 # background colour
 root.config(bg='#f9db17')
 # window title
-root.title("The National Lottery")
+root.title("The South African National Lottery")
 # for an image
 canvas = Canvas(root, width=500, height=200, bg='#f9db17', borderwidth=0, highlightthickness=0)
 canvas.place(x=135, y=5)
@@ -52,6 +52,13 @@ def generate_list3():
 
 def generate_nums():
     winnings_won1 = []
+    winnings_won2 = []
+    winnings_won3 = []
+    count = 0
+    count_2 = 0
+    count_3 = 0
+    total_winnings = []
+    active_set = True
     # f = open("details.txt", "a+")
     # f.write("Your Winnings Were:" + " " + winnings_won)
     # f.close()
@@ -70,11 +77,22 @@ def generate_nums():
     lotto_num_lbl5.configure(text=lotto_nums[4], bg="white")
     lotto_num_lbl6.configure(text=lotto_nums[5], bg="red")
 
-    count = 0
     try:
         for x in lotto_nums:
             if x in lotto_list1 or lotto_list2 or lotto_list3:
                 count += 1
+                if lotto_list1 == True and lotto_list2 == False and lotto_list3 == False:
+                    return total_winnings.append(lotto_list1)
+                elif lotto_list1 == True and lotto_list2 == True and lotto_list3 == False:
+                    set_winnings = lotto_list1 + lotto_list2
+                    return total_winnings.append(set_winnings)
+                elif lotto_list1 == False and lotto_list2 == True and lotto_list3 == True:
+                    set_winnings = lotto_list2 + lotto_list3
+                    return total_winnings.append(set_winnings)
+                elif lotto_list1 == True and lotto_list2 == False and lotto_list3 == True:
+                    set_winnings = lotto_list1 + lotto_list3
+                    return total_winnings.append(set_winnings)
+
         if count <= 1:
             messagebox.showinfo("Bad Luck!",
                                 str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
