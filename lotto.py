@@ -58,7 +58,7 @@ def generate_nums():
     count_2 = 0
     count_3 = 0
     total_winnings = []
-    active_set = True
+    active_set = ACTIVE
     # f = open("details.txt", "a+")
     # f.write("Your Winnings Were:" + " " + winnings_won)
     # f.close()
@@ -68,8 +68,24 @@ def generate_nums():
     lotto_list1.append(int(user_num_entry5.get()))
     lotto_list1.append(int(user_num_entry6.get()))
     lotto_list1.append(int(user_num_entry7.get()))
+
+    lotto_list2.append(int(user_num_entry2.get()))
+    lotto_list2.append(int(user_num_entry8.get()))
+    lotto_list2.append(int(user_num_entry9.get()))
+    lotto_list2.append(int(user_num_entry10.get()))
+    lotto_list2.append(int(user_num_entry11.get()))
+    lotto_list2.append(int(user_num_entry12.get()))
+
+    lotto_list3.append(int(user_num_entry13.get()))
+    lotto_list3.append(int(user_num_entry14.get()))
+    lotto_list3.append(int(user_num_entry15.get()))
+    lotto_list3.append(int(user_num_entry16.get()))
+    lotto_list3.append(int(user_num_entry17.get()))
+    lotto_list3.append(int(user_num_entry18.get()))
+
     lotto_nums = sample(range(1, 49), 6)
     lotto_nums.sort()
+
     lotto_num_lbl1.configure(text=lotto_nums[0], bg="white")
     lotto_num_lbl2.configure(text=lotto_nums[1], bg="white")
     lotto_num_lbl3.configure(text=lotto_nums[2], bg="white")
@@ -77,53 +93,34 @@ def generate_nums():
     lotto_num_lbl5.configure(text=lotto_nums[4], bg="white")
     lotto_num_lbl6.configure(text=lotto_nums[5], bg="red")
 
+    if len(lotto_list1) == 6 and len(lotto_list2) == 0 and len(lotto_list3) == 0:
+        state = user_num_entry2.configure(state=DISABLED), user_num_entry8.configure(state=DISABLED), user_num_entry9.configure(state=DISABLED), user_num_entry10.configure(state=DISABLED), user_num_entry11.configure(state=DISABLED), user_num_entry12.configure(state=DISABLED)
+        return total_winnings.append(lotto_list1) and state
+    elif lotto_list1 == active_set and lotto_list2 == active_set and lotto_list3 != active_set:
+        set_winnings = lotto_list1 + lotto_list2
+        total_winnings.append(set_winnings)
+    elif lotto_list1 != active_set and lotto_list2 == active_set and lotto_list3 == active_set:
+        set_winnings = lotto_list2 + lotto_list3
+        total_winnings.append(set_winnings)
+    elif lotto_list1 == active_set and lotto_list2 != active_set and lotto_list3 == active_set:
+        set_winnings = lotto_list1 + lotto_list3
+        total_winnings.append(set_winnings)
+    elif lotto_list1 != active_set and lotto_list2 != active_set and lotto_list3 != active_set:
+        messagebox.showerror("Error", "Please Play At One Set")
+
     try:
         for x in lotto_nums:
             if x in lotto_list1 or lotto_list2 or lotto_list3:
                 count += 1
-                if lotto_list1 == True and lotto_list2 == False and lotto_list3 == False:
-                    return total_winnings.append(lotto_list1)
-                elif lotto_list1 == True and lotto_list2 == True and lotto_list3 == False:
-                    set_winnings = lotto_list1 + lotto_list2
-                    return total_winnings.append(set_winnings)
-                elif lotto_list1 == False and lotto_list2 == True and lotto_list3 == True:
-                    set_winnings = lotto_list2 + lotto_list3
-                    return total_winnings.append(set_winnings)
-                elif lotto_list1 == True and lotto_list2 == False and lotto_list3 == True:
-                    set_winnings = lotto_list1 + lotto_list3
-                    return total_winnings.append(set_winnings)
-
         if count <= 1:
             messagebox.showinfo("Bad Luck!",
                                 str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
                                     winnings[0]))
             str(winnings_won1.append(winnings[0]))
-        elif count == 2:
-            messagebox.showinfo("Congratulations!",
-                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
-                                    winnings[1]))
-            str(winnings_won1.append(winnings[1]))
-        elif count == 3:
-            messagebox.showinfo("Congratulations!",
-                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + " " + "R" + str(
-                                    winnings[2]))
-            str(winnings_won1.append(winnings[2]))
-        elif count == 4:
-            messagebox.showinfo("Congratulations!",
-                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + str(winnings[3]))
-            str(winnings_won1.append(winnings[3]))
-        elif count == 5:
-            messagebox.showinfo("Congratulations!",
-                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + str(
-                                    winnings_won1.append(winnings[4])))
-        elif count == 6:
-            messagebox.showinfo("Congratulations!",
-                                str(count) + " " + "Numbers" + "\n" + "Your Winnings Are:" + str(
-                                    winnings_won1.append(winnings[5])))
-            print(winnings_won1)
-        return lotto_nums
+        elif count in [2, 3, 4, 5, 6]:
+            messagebox.showinfo("Bad Luck!", f"{count_2} Numbers\nYourWinnings Are: R{winnings[0]}")
     except ValueError:
-        messagebox.showinfo("Failure", "Please Enter Digits Only")
+        messagebox.showerror("Error", "Please Enter Digits Only")
 
 
 def banking_details():
